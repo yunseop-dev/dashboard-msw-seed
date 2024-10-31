@@ -85,7 +85,7 @@ export const CustomerList = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {isLoading ? (
-                <tr>
+                <tr data-testid="loading-spinner">
                   <td colSpan={4} className="text-center py-4">
                     <div className="flex justify-center">
                       <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />

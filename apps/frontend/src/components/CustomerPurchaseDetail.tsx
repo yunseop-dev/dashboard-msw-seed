@@ -6,17 +6,29 @@ interface CustomerPurchaseDetailProps {
 }
 
 export const CustomerPurchaseDetail: React.FC<CustomerPurchaseDetailProps> = ({ customerId }) => {
-  const { data: purchases, isLoading } = useGetCustomerPurchases(
+  const { data: purchases, isLoading, isError } = useGetCustomerPurchases(
     customerId || 0,
     { enabled: !!customerId }
   );
 
   if (isLoading) {
     return (
-      <div className="flex justify-center p-8">
+      <div data-testid="loading-spinner" className="flex justify-center p-8">
         <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
+  }
+
+  if (isError) {
+    return (
+      <div className='min-h-32 flex items-center justify-center'>데이터를 불러오는데 실패했습니다.</div>
+    )
+  }
+
+  if (purchases?.length === 0) {
+    return (
+      <div className='min-h-32 flex items-center justify-center'>구매 내역이 없습니다.</div>
+    )
   }
 
   return (

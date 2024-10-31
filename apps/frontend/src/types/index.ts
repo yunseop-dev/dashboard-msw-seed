@@ -19,6 +19,11 @@ export interface Customer {
 }
 
 export interface PurchaseFrequencyParams {
-  from: string;
-  to: string;
+  from?: string;
+  to?: string;
+}
+
+export interface GetCustomersParams {
+  sortBy?: 'asc' | 'desc';
+  name?: string;
 }

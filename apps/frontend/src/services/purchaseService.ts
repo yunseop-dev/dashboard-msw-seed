@@ -2,10 +2,10 @@ import { api } from '../lib/axios';
 import { Purchase, PurchaseFrequency, PurchaseFrequencyParams } from '../types';
 
 export const purchaseService = {
-  getPurchaseFrequency: async (params: PurchaseFrequencyParams) => {
-    const { data } = await api.get<PurchaseFrequency[]>(
-      `/api/purchase-frequency?from=${params.from}&to=${params.to}`
-    );
+  getPurchaseFrequency: async (params?: PurchaseFrequencyParams) => {
+    const { data } = await api.get<PurchaseFrequency[]>(`/api/purchase-frequency`, {
+      params
+    });
     return data;
   },
 

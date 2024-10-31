@@ -10,7 +10,7 @@ export const CustomerList = () => {
   const [selectedCustomerId, setSelectedCustomerId] = useState<number | null>(null);
   const [sortBy, setSortBy] = useState<SortOrder>();
 
-  const { data: customers = [], isLoading } = useGetCustomers({
+  const { data: customers = [], isLoading, isError } = useGetCustomers({
     sortBy,
     name: searchName || undefined,
   });
@@ -106,10 +106,17 @@ export const CustomerList = () => {
                   </td>
                 </tr>
               ))}
-              {!isLoading && customers.length === 0 && (
+              {!isLoading && customers.length === 0 && !isError && (
                 <tr>
                   <td colSpan={4} className="text-center py-4 text-gray-500">
                     데이터가 없습니다
+                  </td>
+                </tr>
+              )}
+              {isError && (
+                <tr>
+                  <td colSpan={4} className="text-center py-4 text-gray-500">
+                    오류가 발생했습니다.
                   </td>
                 </tr>
               )}

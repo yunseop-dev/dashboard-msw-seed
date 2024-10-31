@@ -5,6 +5,11 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { queryClient } from './lib/queryClient';
 import App from './App';
 import './index.css';
+import { serviceWorker } from './mocks/browser';
+
+if (import.meta.env.DEV) {
+  await serviceWorker.start({ onUnhandledRequest: 'bypass' });
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

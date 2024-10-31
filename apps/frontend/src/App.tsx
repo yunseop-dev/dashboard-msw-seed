@@ -1,7 +1,13 @@
-function App() {
-  return (
-    <div>Hello World</div>
-  )
-}
+import { PurchaseFrequencyChart } from './components/PurchaseFrequencyChart';
 
-export default App
+const App = () => {
+  return (
+    <div className="min-h-screen bg-gray-100 p-8">
+      <div className="max-w-7xl mx-auto space-y-8">
+        <PurchaseFrequencyChart />
+      </div>
+    </div>
+  );
+};
+
+export default App;

@@ -15,6 +15,9 @@ export default defineConfig({
       exclude: [
         'node_modules/',
         './vitest.setup.ts',
+        './public/',
+        './src/lib/queryClient.ts',
+        './src/mocks/',
       ],
     },
   },

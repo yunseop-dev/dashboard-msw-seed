@@ -21,3 +21,4 @@ Thumbs.db
 
 # Ignore yarn.lock for Yarn
 yarn.lock
+coverage

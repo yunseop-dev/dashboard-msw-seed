@@ -1,5 +1,3 @@
-
-// src/mocks/handlers.ts
 import { delay, http, HttpResponse, type JsonBodyType } from 'msw';
 import { mockCustomers, mockPurchaseFrequency, mockPurchases } from './data';
 

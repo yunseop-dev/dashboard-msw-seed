@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDebounce } from '../hooks';
 import { useGetCustomers } from '../hooks/queries';
 import { CustomerPurchaseDetail } from './CustomerPurchaseDetail';
 import { Modal } from './Modal';
@@ -6,17 +7,19 @@ import { Modal } from './Modal';
 type SortOrder = 'asc' | 'desc';
 
 export const CustomerList = () => {
-  const [searchName, setSearchName] = useState('');
+  const [searchInput, setSearchInput] = useState('');
   const [selectedCustomerId, setSelectedCustomerId] = useState<number | null>(null);
   const [sortBy, setSortBy] = useState<SortOrder>();
 
+  const debouncedSearchName = useDebounce(searchInput, 500);
+
   const { data: customers = [], isLoading, isError } = useGetCustomers({
     sortBy,
-    name: searchName || undefined,
+    name: debouncedSearchName || undefined,
   });
 
   const handleReset = () => {
-    setSearchName('');
+    setSearchInput('');
     setSortBy(undefined);
   };
 
@@ -34,12 +37,12 @@ export const CustomerList = () => {
               type="text"
               placeholder="고객 이름 검색"
               className="w-full border p-2 rounded pr-10"
-              value={searchName}
-              onChange={(e) => setSearchName(e.target.value)}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
-            {searchName && (
+            {searchInput && (
               <button
-                onClick={() => setSearchName('')}
+                onClick={() => setSearchInput('')}
                 className="absolute right-10 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
               >
                 ⨉
